@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HumanizeIQ.ai - Standby for the Future of AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #141E30, #243B55);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-top: 50px;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        #countdown {
+            font-size: 3rem;
+            margin: 40px 0;
+            color: #FFD700;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HumanizeIQ.ai</h1>
+        <p>Making AI Accessible in a More Natural, Human-Like Fashion</p>
+        <p>We believe in a democratic AI future for everyone.</p>
+        <p>Our first launch is just around the corner!</p>
+
+        <!-- Countdown Timer -->
+        <div id="countdown"></div>
+
+        <p>Stay tuned for something amazing in 60 days.</p>
+    </div>
+
+    <footer>
+        &copy; 2024 HumanizeIQ.ai - All Rights Reserved
+    </footer>
+
+    <script>
+        // Countdown timer
+        function countdown() {
+            const launchDate = new Date();
+            launchDate.setDate(launchDate.getDate() + 60);  // 60 days from now
+            const countdownElement = document.getElementById("countdown");
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeRemaining = launchDate - now;
+
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                if (timeRemaining < 0) {
+                    clearInterval(timerInterval);
+                    countdownElement.innerHTML = "Launched!";
+                }
+            }
+
+            const timerInterval = setInterval(updateCountdown, 1000);
+        }
+
+        window.onload = countdown;
+    </script>
+</body>
+</html>

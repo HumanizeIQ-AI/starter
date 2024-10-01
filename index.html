@@ -27,16 +27,40 @@
         }
 
         #countdown {
-            font-size: 3rem;
-            margin: 40px 0;
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 10px solid #FFD700;
+            border-radius: 50%;
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
             color: #FFD700;
-            animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .clock-hand {
+            position: absolute;
+            background-color: #FFD700;
+            transform-origin: 50% 100%;
+            transform: rotate(0deg);
+        }
+
+        .hour-hand {
+            width: 5px;
+            height: 80px;
+        }
+
+        .minute-hand {
+            width: 3px;
+            height: 110px;
+        }
+
+        .second-hand {
+            width: 2px;
+            height: 140px;
+            background-color: red;
         }
 
         .container {
@@ -73,10 +97,15 @@
             HumanizeIQ.AI is here to bridge that gap, ensuring AI isn't just for the few, but for everyone. Stay tuned as we prepare to launch our vision of human-centered AI, designed to transform lives and organizations for the better.
         </p>
 
-        <!-- Countdown Timer -->
-        <div id="countdown"></div>
+        <!-- Clock face countdown -->
+        <div id="countdown">
+            <div id="days"></div>
+            <div class="clock-hand hour-hand" id="hour-hand"></div>
+            <div class="clock-hand minute-hand" id="minute-hand"></div>
+            <div class="clock-hand second-hand" id="second-hand"></div>
+        </div>
 
-        <p>Stay tuned for something amazing in 60 days.</p>
+        <p>Stay tuned for something amazing on October 22nd, 2024.</p>
     </div>
 
     <footer>
@@ -84,33 +113,48 @@
     </footer>
 
     <script>
-        // Countdown timer
-        function countdown() {
-            const launchDate = new Date();
-            launchDate.setDate(launchDate.getDate() + 60);  // 60 days from now
-            const countdownElement = document.getElementById("countdown");
+        // Set the target launch date: October 22, 2024
+        const launchDate = new Date('October 22, 2024 00:00:00').getTime();
 
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const timeRemaining = launchDate - now;
+        // Countdown and clock face function
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeRemaining = launchDate - now;
 
-                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById('days').innerHTML = `${days}d`;
 
-                if (timeRemaining < 0) {
-                    clearInterval(timerInterval);
-                    countdownElement.innerHTML = "Launched!";
-                }
+            // Set clock hands
+            const hourHand = document.getElementById('hour-hand');
+            const minuteHand = document.getElementById('minute-hand');
+            const secondHand = document.getElementById('second-hand');
+
+            const hourRotation = (hours % 12) * 30 + (minutes / 2);
+            const minuteRotation = minutes * 6;
+            const secondRotation = seconds * 6;
+
+            hourHand.style.transform = `rotate(${hourRotation}deg)`;
+            minuteHand.style.transform = `rotate(${minuteRotation}deg)`;
+            secondHand.style.transform = `rotate(${secondRotation}deg)`;
+
+            // Countdown ends
+            if (timeRemaining < 0) {
+                clearInterval(timerInterval);
+                document.getElementById('days').innerHTML = "Launched!";
+                hourHand.style.display = 'none';
+                minuteHand.style.display = 'none';
+                secondHand.style.display = 'none';
             }
-
-            const timerInterval = setInterval(updateCountdown, 1000);
         }
 
-        window.onload = countdown;
+        // Update the countdown every second
+        const timerInterval = setInterval(updateCountdown, 1000);
+
+        window.onload = updateCountdown;
     </script>
 </body>
 </html>

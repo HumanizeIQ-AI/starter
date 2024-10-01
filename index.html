@@ -21,14 +21,22 @@
         }
 
         p {
-            font-size: 1.5rem;
-            margin: 20px 0;
+            font-size: 1.2rem;
+            margin: 20px 40px;
+            line-height: 1.6;
         }
 
         #countdown {
             font-size: 3rem;
             margin: 40px 0;
             color: #FFD700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         .container {
@@ -51,9 +59,19 @@
 <body>
     <div class="container">
         <h1>HumanizeIQ.ai</h1>
-        <p>Making AI Accessible in a More Natural, Human-Like Fashion</p>
-        <p>We believe in a democratic AI future for everyone.</p>
-        <p>Our first launch is just around the corner!</p>
+        <p>
+            AI is reshaping the world as we know it. From healthcare to business, entertainment to education, artificial intelligence is becoming an integral part of every field. 
+            Yet, for many individuals and organizations, AI remains intimidating—a powerful tool that's often seen as complex or even risky to adopt. 
+            But what if AI could be made more accessible, more understandable, and more human?
+        </p>
+        <p>
+            At HumanizeIQ.AI, we believe that AI can enhance our lives—if it's integrated thoughtfully with a human touch. 
+            By introducing a human element into the AI experience, we’re transforming how people engage with technology. 
+            Our mission is to provide product services and education that make AI easy, democratic, and empowering for everyone—no matter their background or expertise.
+        </p>
+        <p>
+            HumanizeIQ.AI is here to bridge that gap, ensuring AI isn't just for the few, but for everyone. Stay tuned as we prepare to launch our vision of human-centered AI, designed to transform lives and organizations for the better.
+        </p>
 
         <!-- Countdown Timer -->
         <div id="countdown"></div>

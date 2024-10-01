@@ -27,40 +27,11 @@
         }
 
         #countdown {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            border: 10px solid #FFD700;
-            border-radius: 50%;
-            margin: 40px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
+            font-size: 3rem;
+            margin: 40px 0;
             color: #FFD700;
-        }
-
-        .clock-hand {
-            position: absolute;
-            background-color: #FFD700;
-            transform-origin: 50% 100%;
-            transform: rotate(0deg);
-        }
-
-        .hour-hand {
-            width: 5px;
-            height: 80px;
-        }
-
-        .minute-hand {
-            width: 3px;
-            height: 110px;
-        }
-
-        .second-hand {
-            width: 2px;
-            height: 140px;
-            background-color: red;
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: 2px;
         }
 
         .container {
@@ -94,18 +65,11 @@
             Our mission is to provide product services and education that make AI easy, democratic, and empowering for everyone—no matter their background or expertise.
         </p>
         <p>
-            HumanizeIQ.AI is here to bridge that gap, ensuring AI isn't just for the few, but for everyone. Stay tuned as we prepare to launch our vision of human-centered AI, designed to transform lives and organizations for the better.
+            HumanizeIQ.AI is here to bridge that gap, ensuring AI isn't just for the few, but for everyone. Stay tuned for our upcoming product designed to make AI human and accessible.
         </p>
 
-        <!-- Clock face countdown -->
-        <div id="countdown">
-            <div id="days"></div>
-            <div class="clock-hand hour-hand" id="hour-hand"></div>
-            <div class="clock-hand minute-hand" id="minute-hand"></div>
-            <div class="clock-hand second-hand" id="second-hand"></div>
-        </div>
-
-        <p>Stay tuned for something amazing on October 22nd, 2024.</p>
+        <!-- Digital Countdown Timer -->
+        <div id="countdown"></div>
     </div>
 
     <footer>
@@ -113,10 +77,10 @@
     </footer>
 
     <script>
-        // Set the target launch date: October 22, 2024
-        const launchDate = new Date('October 22, 2024 00:00:00').getTime();
+        // Set the target launch date: 60 days after October 22, 2024
+        const launchDate = new Date('December 21, 2024 00:00:00').getTime();
 
-        // Countdown and clock face function
+        // Countdown function
         function updateCountdown() {
             const now = new Date().getTime();
             const timeRemaining = launchDate - now;
@@ -126,28 +90,14 @@
             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-            document.getElementById('days').innerHTML = `${days}d`;
-
-            // Set clock hands
-            const hourHand = document.getElementById('hour-hand');
-            const minuteHand = document.getElementById('minute-hand');
-            const secondHand = document.getElementById('second-hand');
-
-            const hourRotation = (hours % 12) * 30 + (minutes / 2);
-            const minuteRotation = minutes * 6;
-            const secondRotation = seconds * 6;
-
-            hourHand.style.transform = `rotate(${hourRotation}deg)`;
-            minuteHand.style.transform = `rotate(${minuteRotation}deg)`;
-            secondHand.style.transform = `rotate(${secondRotation}deg)`;
+            document.getElementById('countdown').innerHTML = `
+                ${days}d ${hours}h ${minutes}m ${seconds}s
+            `;
 
             // Countdown ends
             if (timeRemaining < 0) {
                 clearInterval(timerInterval);
-                document.getElementById('days').innerHTML = "Launched!";
-                hourHand.style.display = 'none';
-                minuteHand.style.display = 'none';
-                secondHand.style.display = 'none';
+                document.getElementById('countdown').innerHTML = "Launched!";
             }
         }
 
